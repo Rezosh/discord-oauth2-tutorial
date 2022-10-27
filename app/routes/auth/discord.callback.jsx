@@ -1,4 +1,5 @@
 import { json } from "@remix-run/node";
+import { getUserDetails } from "~/services/discord";
 
 export const loader = async ({ request }) => {
   // Get the code from the query string
@@ -29,5 +30,9 @@ export const loader = async ({ request }) => {
   });
   const credentials = await response.json();
 
-  return json(credentials);
+  const { access_token, refresh_token } = credentials;
+
+  const user = await getUserDetails(access_token);
+
+  return json(user);
 };
