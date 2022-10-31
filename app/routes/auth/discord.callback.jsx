@@ -30,7 +30,7 @@ export const loader = async ({ request }) => {
   });
   const credentials = await response.json();
 
-  const { access_token, refresh_token } = credentials;
+  const { access_token } = credentials;
 
   const user = await getUserDetails(access_token);
 
